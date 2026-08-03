@@ -1,0 +1,263 @@
+{
+  "id": "smalland",
+  "name": "Smalland Dedicated Server",
+  "version": "1.0.0",
+  "author": "Shenniko",
+  "description": "WindowsGSH module for installing, configuring, launching, monitoring, and backing up a Smalland dedicated server.",
+  "url": "https://github.com/WindowsGSH/WindowsGSH.Smalland",
+  "homepage": "https://store.steampowered.com/app/768200/Smalland_Survive_the_Wilds/",
+  "repository": "https://github.com/WindowsGSH/WindowsGSH.Smalland",
+  "sourceUrl": "https://github.com/WindowsGSH/WindowsGSH.Smalland",
+  "color": "#1E8449",
+  "moduleApiVersion": "1.0",
+  "minimumWindowsGshVersion": "0.1.0",
+  "type": "csharp",
+  "entry": "WindowsGSH.Modules.Smalland.SmallandModule",
+  "steam": {
+    "appId": "808040",
+    "anonymous": true,
+    "validate": true
+  },
+  "entryPoints": {
+    "start": "SMALLAND/Binaries/Win64/SMALLANDServer-Win64-Shipping.exe",
+    "processName": "SMALLANDServer-Win64-Shipping"
+  },
+  "runtime": {
+    "allowsEmbeddedConsole": true,
+    "consoleStrategy": "LogTailOnly",
+    "portIncrements": 1,
+    "queryProtocol": "Process",
+    "defaultArguments": "/Game/Maps/WorldGame/WorldGame_Smalland?SERVERNAME={quote:server.name}?WORLDNAME={quote:server.worldName} {?server.password:?PASSWORD={quote:server.password}} {?game.friendlyFire:?FRIENDLYFIRE} {?game.peacefulMode:?PEACEFULMODE} {?game.keepInventory:?KEEPINVENTORY} {?game.noDeterioration:?NODETERIORATION} {?server.private:?PRIVATE} ?lengthofdayseconds={game.lengthOfDaySeconds}?lengthofseasonseconds={game.lengthOfSeasonSeconds}?creaturehealthmodifier={game.creatureHealthModifier}?creaturedamagemodifier={game.creatureDamageModifier}?nourishmentlossmodifier={game.nourishmentLossModifier}?falldamagemodifier={game.fallDamageModifier} -port={network.port} {?launch.log:-log} {server.additionalArguments}",
+    "logPath": "SMALLAND/Saved/Logs",
+    "stop": {
+      "strategy": "closeWindow",
+      "waitMilliseconds": 10000,
+      "killAfterTimeout": true
+    }
+  },
+  "capabilities": {
+    "directConnection": true,
+    "consoleCommands": false
+  },
+  "configFields": [
+    {
+      "key": "server.name",
+      "label": "Server Name",
+      "type": "Text",
+      "defaultValue": "Smalland Dedicated Server",
+      "required": true,
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.worldName",
+      "label": "World Name",
+      "type": "Text",
+      "defaultValue": "World",
+      "required": true,
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.password",
+      "label": "Password",
+      "type": "Password",
+      "defaultValue": "",
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.private",
+      "label": "Private Server",
+      "type": "Boolean",
+      "defaultValue": false,
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.maxPlayers",
+      "label": "Max Players",
+      "type": "Number",
+      "defaultValue": 16,
+      "minimum": 1,
+      "maximum": 64,
+      "group": "Server"
+    },
+    {
+      "key": "network.port",
+      "label": "Server Port",
+      "type": "Port",
+      "defaultValue": 7777,
+      "required": true,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.publicIp",
+      "label": "Public IP",
+      "type": "Text",
+      "defaultValue": "",
+      "group": "Network"
+    },
+    {
+      "key": "game.friendlyFire",
+      "label": "Friendly Fire",
+      "type": "Boolean",
+      "defaultValue": false,
+      "group": "Gameplay",
+      "restartRequired": true
+    },
+    {
+      "key": "game.peacefulMode",
+      "label": "Peaceful Mode",
+      "type": "Boolean",
+      "defaultValue": false,
+      "group": "Gameplay",
+      "restartRequired": true
+    },
+    {
+      "key": "game.keepInventory",
+      "label": "Keep Inventory",
+      "type": "Boolean",
+      "defaultValue": false,
+      "group": "Gameplay",
+      "restartRequired": true
+    },
+    {
+      "key": "game.noDeterioration",
+      "label": "No Deterioration",
+      "type": "Boolean",
+      "defaultValue": false,
+      "group": "Gameplay",
+      "restartRequired": true
+    },
+    {
+      "key": "game.lengthOfDaySeconds",
+      "label": "Day Length",
+      "type": "Number",
+      "defaultValue": 1800,
+      "minimum": 1,
+      "group": "Gameplay",
+      "restartRequired": true
+    },
+    {
+      "key": "game.lengthOfSeasonSeconds",
+      "label": "Season Length",
+      "type": "Number",
+      "defaultValue": 10800,
+      "minimum": 1,
+      "group": "Gameplay",
+      "restartRequired": true
+    },
+    {
+      "key": "game.creatureHealthModifier",
+      "label": "Creature Health",
+      "type": "Number",
+      "defaultValue": 100,
+      "minimum": 20,
+      "maximum": 300,
+      "group": "Creatures",
+      "restartRequired": true
+    },
+    {
+      "key": "game.creatureDamageModifier",
+      "label": "Creature Damage",
+      "type": "Number",
+      "defaultValue": 100,
+      "minimum": 20,
+      "maximum": 300,
+      "group": "Creatures",
+      "restartRequired": true
+    },
+    {
+      "key": "game.nourishmentLossModifier",
+      "label": "Nourishment Loss",
+      "type": "Number",
+      "defaultValue": 100,
+      "minimum": 0,
+      "maximum": 100,
+      "group": "Survival",
+      "restartRequired": true
+    },
+    {
+      "key": "game.fallDamageModifier",
+      "label": "Fall Damage",
+      "type": "Number",
+      "defaultValue": 100,
+      "minimum": 50,
+      "maximum": 100,
+      "group": "Survival",
+      "restartRequired": true
+    },
+    {
+      "key": "launch.log",
+      "label": "Log Argument",
+      "type": "Boolean",
+      "defaultValue": true,
+      "description": "Adds -log so Smalland writes logs under SMALLAND/Saved/Logs.",
+      "group": "Launch",
+      "restartRequired": true
+    },
+    {
+      "key": "server.additionalArguments",
+      "label": "Additional Arguments",
+      "type": "CommandLine",
+      "defaultValue": "",
+      "description": "Extra Smalland launch arguments. WindowsGSH removes duplicates for module-managed flags.",
+      "group": "Launch",
+      "restartRequired": true
+    }
+  ],
+  "ports":   [
+      {
+          "id":  "game",
+          "name":  "Game Port",
+          "protocol":  "udp",
+          "configField":  "network.port",
+          "required":  true
+      },
+      {
+          "id":  "query",
+          "name":  "Query Port",
+          "protocol":  "udp",
+          "offsetFrom": "game",
+          "offset": 1,
+          "required": false,
+          "openExternally": false,
+          "checkLocalListener": false
+      }
+  ],
+  "backupTargets": [
+    {
+      "key": "savegames",
+      "label": "Save Games",
+      "path": "SMALLAND/Saved/SaveGames",
+      "type": "directory",
+      "required": false
+    },
+    {
+      "key": "windowsConfig",
+      "label": "Windows Server Config",
+      "path": "SMALLAND/Saved/Config/WindowsServer",
+      "type": "directory",
+      "required": false
+    },
+    {
+      "key": "moduleConfig",
+      "label": "Smalland Module Config",
+      "path": "smalland_conf.json",
+      "type": "file",
+      "required": false
+    },
+    {
+      "key": "logs",
+      "label": "Logs",
+      "path": "SMALLAND/Saved/Logs",
+      "type": "directory",
+      "required": false
+    }
+  ],
+  "addons": []
+}
